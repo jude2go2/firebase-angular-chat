@@ -9,9 +9,23 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MaterialModule } from './material/material.module';
+import { HeaderComponent } from './components/header/header.component';
+import { RoomListComponent } from './components/room-list/room-list.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { AddRoomComponent } from './components/add-room/add-room.component';
+import { ChatroomContainerComponent } from './components/chatroom-container/chatroom-container.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    RoomListComponent,
+    ChatComponent,
+    AddRoomComponent,
+    ChatroomContainerComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

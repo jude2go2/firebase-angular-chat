@@ -1,0 +1,18 @@
+<header class="header">
+  <mat-toolbar color="primary">
+    <span>Angular Firebase Chat</span>
+    <span class="header__spacer"></span>
+
+    <button
+      *ngIf="!(isLoggedIn$ | async)"
+      mat-icon-button
+      aria-label="Example icon-button with share icon"
+      (click)="onGoogleSignin()"
+    >
+      <mat-icon>login</mat-icon>
+    </button>
+    <button *ngIf="isLoggedIn$ | async" mat-icon-button (click)="signOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>

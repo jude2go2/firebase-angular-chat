@@ -9,11 +9,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'angular-firebase-chat';
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   ngOnInit() {}
-
-  public onGoogleSignin() {
-    this.authService.GoogleAuth();
-  }
 }

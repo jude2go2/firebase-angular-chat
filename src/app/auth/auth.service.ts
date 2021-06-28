@@ -7,12 +7,17 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { User } from '../models/user.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+
+  private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -22,20 +27,28 @@ export class AuthService {
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
+    const user = JSON.parse(localStorage.getItem('user') || '');
+    if (user !== null) {
+      this.isLoggedIn$.next(true);
+    }
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
+
+        this.isLoggedIn$.next(true);
       } else {
         localStorage.removeItem('user');
+        this.isLoggedIn$.next(false);
       }
     });
   }
 
   // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '');
-    return user !== null && user.emailVerified !== false ? true : false;
+  public isLoggedIn(): Observable<boolean> {
+    // const user = JSON.parse(localStorage.getItem('user') || '');
+    // return user !== null && user.emailVerified !== false ? true : false;
+    return this.isLoggedIn$.asObservable();
   }
 
   // Sign in with Google
@@ -75,7 +88,7 @@ export class AuthService {
   }
 
   // Sign out
-  private SignOut() {
+  public signOut(): Promise<void> {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
