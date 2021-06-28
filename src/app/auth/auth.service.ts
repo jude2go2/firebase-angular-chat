@@ -27,7 +27,8 @@ export class AuthService {
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    const user = JSON.parse(localStorage.getItem('user') || '');
+    const userString: string | null = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
     if (user !== null) {
       this.isLoggedIn$.next(true);
     }
@@ -44,16 +45,17 @@ export class AuthService {
     });
   }
 
-  // Returns true when user is looged in and email is verified
   public isLoggedIn(): Observable<boolean> {
-    // const user = JSON.parse(localStorage.getItem('user') || '');
-    // return user !== null && user.emailVerified !== false ? true : false;
     return this.isLoggedIn$.asObservable();
   }
 
   // Sign in with Google
   public GoogleAuth(): any /*returns the google signup popup*/ {
-    return this.AuthLogin(new firebase.default.auth.GoogleAuthProvider());
+    return this.AuthLogin(new firebase.default.auth.GoogleAuthProvider()).then(
+      () => {
+        this.router.navigate(['chat']);
+      }
+    );
   }
 
   // Auth logic to run auth providers
