@@ -25,8 +25,3 @@ export class HeaderComponent implements OnInit {
     this.authService.signOut();
   }
 }
-function tap(
-  arg0: () => void
-): import('rxjs').OperatorFunction<boolean, unknown> {
-  throw new Error('Function not implemented.');
-}
