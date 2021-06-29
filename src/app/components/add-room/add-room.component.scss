@@ -1,0 +1,11 @@
+.add-room {
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  ::ng-deep {
+    mat-form-field {
+      max-width: 100%;
+    }
+  }
+}

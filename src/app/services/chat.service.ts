@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ChatRoom } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +14,31 @@ export class ChatService {
     return this._db
       .collection('rooms')
       .doc(roomId)
+      .collection('messages')
       .snapshotChanges()
       .pipe(
-        map((data) => {
-          return data.payload.data();
+        map((messages) => {
+          return messages.map((message) => {
+            const data = message.payload.doc.data() as Object;
+            return {
+              ...data,
+              id: message.payload.doc.id,
+            };
         })
       );
   }
 
-  public addRoom(roomName: string = 'blabla'): void {
-    this._db.collection('rooms').add({
+  public addRoom(roomName: string, userId: string): void {
+    this._db.collection('rooms').add(<ChatRoom>{
       roomName: roomName,
       activeUsers: [],
+      userCreatedId: userId,
     });
+  }
+
+  public removeRoomById(roomId: string): void {
+    //TODO
+    this._db.collection('rooms').doc(roomId).delete();
   }
 
   public getRoomList(): Observable<any> {
@@ -45,6 +58,6 @@ export class ChatService {
       );
   }
 
-  public addActiveUserToChatRoom(id: string): void {}
-  public removeActiveUserFromChatRoom(id: string): void {}
+  public addActiveUserToChatRoom(nickname: string): void {}
+  public removeActiveUserFromChatRoom(nickname: string): void {}
 }

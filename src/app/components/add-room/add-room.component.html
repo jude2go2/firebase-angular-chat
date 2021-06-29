@@ -1,1 +1,19 @@
-<p>add-room works!</p>
+<div class="add-room">
+  <h2>Add Room Name</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>Outline form field</mat-label>
+    <input #roomName matInput placeholder="Placeholder" />
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+  <div class="add-room__actions">
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="roomName.value"
+    >
+      Add Room
+    </button>
+    <button mat-raised-button color="accent">Cancel</button>
+  </div>
+</div>

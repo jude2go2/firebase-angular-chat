@@ -1,1 +1,20 @@
-<p>room-list works!</p>
+<div class="room-list" *ngIf="roomList">
+  <h2>Select Room</h2>
+
+  <mat-selection-list #shoes [multiple]="false">
+    <mat-list-option
+      class="room-list__room"
+      *ngFor="let room of roomList | keyvalue"
+      [value]="room"
+      [routerLink]="['/chat', room.value.id]"
+    >
+      {{ room.value.roomName }}
+
+      <span
+        *ngIf="room.value.userCreatedId === userId"
+        (click)="deleteRoom(room.value.id)"
+        >×</span
+      >
+    </mat-list-option>
+  </mat-selection-list>
+</div>

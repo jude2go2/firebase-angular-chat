@@ -1,0 +1,10 @@
+.chat-container {
+  padding: 10px 50px;
+  display: flex;
+  &__room-list {
+    flex: 1;
+  }
+  &__active-chat {
+    flex: 4;
+  }
+}

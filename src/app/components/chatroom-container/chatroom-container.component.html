@@ -1,5 +1,11 @@
-<div class="chat-container">
-  <div class="chat-container__room-list">Room List</div>
+<div class="chat-container" *ngIf="user">
+  <div class="chat-container__room-list" *ngIf="chatRooms$ | async as rooms">
+    <app-room-list
+      [roomList]="rooms"
+      [userId]="user.uid"
+      (onDeleteRoom)="deleteRoom($event)"
+    ></app-room-list>
+  </div>
 
   <!-- only if in active chat room -->
   <div class="chat-container__active-chat">
@@ -8,5 +14,9 @@
   </div>
 
   <!-- only if in main chat room -->
-  <div class="chat-container__add-room">Add Room +</div>
+  <div class="chat-container__add-room">
+    <button (click)="openAddRoomModal()" mat-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

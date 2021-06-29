@@ -13,7 +13,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any; // Save logged in user data
+  private userData: User | null = null; // Save logged in user data
+
+  private userData$: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
 
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
@@ -34,9 +37,9 @@ export class AuthService {
     }
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-
+        // this.userData = <User>user;
+        localStorage.setItem('user', JSON.stringify(<User>user));
+        this.userData$.next(<User>user);
         this.isLoggedIn$.next(true);
       } else {
         localStorage.removeItem('user');
@@ -95,5 +98,9 @@ export class AuthService {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     });
+  }
+
+  public getUserData(): Observable<User | null> {
+    return this.userData$.asObservable();
   }
 }
