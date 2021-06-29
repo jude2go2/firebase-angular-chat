@@ -1,11 +1,35 @@
 <div class="chat" *ngIf="messages">
   <div class="chat__messages">
-    <div class="chat__message" *ngFor="let message of messages">
-      {{ message.body }}
+    <div id="case">
+      <div id="earsection">
+        <div id="camera"></div>
+        <div id="speaker"></div>
+      </div>
+      <div id="screen">
+        <cdk-virtual-scroll-viewport itemSize="10" class="chat__viewport">
+          <div
+            class="chat__message"
+            *ngFor="let message of messages"
+            [ngClass]="{
+              'chat__message--current-user': userId === message.userId
+            }"
+          >
+            {{ message.body }}
+          </div>
+        </cdk-virtual-scroll-viewport>
+        <div class="chat__send-message">
+          <mat-form-field appearance="fill">
+            <mat-label>Your Message</mat-label>
+            <input matInput #messageInput />
+          </mat-form-field>
+          <button mat-mini-fab (click)="sendMessage(messageInput.value)">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div id="button">
+        <div id="buttonsquare"></div>
+      </div>
     </div>
-  </div>
-  <div class="chat__send-message">
-    <input type="text" #messageInput />
-    <button (click)="sendMessage(messageInput.value)">Send Message</button>
   </div>
 </div>

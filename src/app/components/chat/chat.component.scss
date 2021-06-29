@@ -1,0 +1,122 @@
+.chat {
+  &__viewport {
+    height: calc(100% - 51px);
+    width: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  &__message {
+    position: relative;
+    background: #e3e3e3;
+    margin: 10px 10px 10px 30px;
+    padding: 10px;
+    &::after {
+      content: "";
+      position: absolute;
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 20px 20px 0;
+      border-color: transparent #e3e3e3 transparent transparent;
+    }
+
+    &--current-user {
+      background: #96ff76;
+      margin: 10px 30px 10px 10px;
+      padding: 10px;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: auto;
+        right: -20px;
+        top: 0;
+        border-style: solid;
+        border-width: 20px 20px 0 0;
+        border-color: #96ff76 transparent transparent transparent;
+      }
+    }
+  }
+
+  &__send-message {
+    position: relative;
+
+    button {
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+
+    ::ng-deep {
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+
+  #case {
+    height: 560px;
+    width: 277px;
+    border-radius: 40px 40px;
+    border: 1px solid #000;
+    position: relative;
+  }
+  #earsection {
+    margin-top: 36px;
+    margin-left: 72px;
+    height: 16px;
+  }
+  #camera {
+    position: absolute;
+    top: 33px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000;
+    border-radius: 9px 9px;
+  }
+  #speaker {
+    position: absolute;
+    top: 39px;
+    left: 97px;
+    width: 54px;
+    height: 5px;
+    margin-left: 15px;
+    border: 1px solid #000;
+    border-radius: 7px 7px;
+  }
+  #screen {
+    clear: both;
+    width: 250px;
+    height: 374px;
+    margin: auto;
+    margin-top: 35px;
+    border: 1px solid #000;
+  }
+  #screen iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+  #button {
+    height: 56px;
+    width: 56px;
+    border: 1px solid #000;
+    border-radius: 28px 28px;
+    margin: auto;
+    margin-top: 22px;
+  }
+  #buttonsquare {
+    height: 17px;
+    width: 17px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 18px;
+  }
+}

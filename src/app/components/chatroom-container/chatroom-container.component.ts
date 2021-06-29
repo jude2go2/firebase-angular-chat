@@ -57,6 +57,7 @@ export class ChatroomContainerComponent implements OnInit {
           const urlArr = routeEvent.url.split('/');
           if (urlArr.length > 2) {
             this.roomId = urlArr[2];
+
             this.roomMessages$ = chatService.getRoomMessages(this.roomId);
           }
         })

@@ -1,4 +1,5 @@
-import { EventEmitter } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { ElementRef, EventEmitter, ViewChild } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { IMessage } from 'src/app/models';
 
@@ -8,23 +9,38 @@ import { IMessage } from 'src/app/models';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport) viewPort?: CdkVirtualScrollViewport;
+
+  @Output() onSendMessage: EventEmitter<string> = new EventEmitter();
+
   @Input() set messages(messages: Array<IMessage>) {
     this._messages = messages.sort((x, y) => {
       return x.timestamp - y.timestamp;
     });
+    if (this.viewPort) {
+      this.viewPort.scrollToIndex(
+        this.messages.length * this.messages.length,
+        'smooth'
+      );
+    }
   }
 
   get messages(): Array<IMessage> {
     return this._messages;
   }
-  @Output() onSendMessage: EventEmitter<string> = new EventEmitter();
+
+  @Input() userId: string = '';
 
   private _messages: Array<IMessage> = [];
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.messages);
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    if (this.viewPort) {
+      this.viewPort.scrollToIndex(this.messages.length * 10, 'smooth');
+    }
   }
 
   public sendMessage(value: string) {

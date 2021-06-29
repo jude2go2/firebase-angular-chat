@@ -11,11 +11,11 @@
   <div class="chat-container__active-chat">
     <div class="chat-container__chat" *ngIf="roomMessages$ | async as messages">
       <app-chat
+        [userId]="user.uid"
         [messages]="messages"
         (onSendMessage)="sendMessage($event)"
       ></app-chat>
     </div>
-    <div class="chat-container__active-users">Active Users</div>
   </div>
 
   <!-- only if in main chat room -->
