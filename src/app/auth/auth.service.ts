@@ -13,6 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+<<<<<<< HEAD
   private userData: User | null = null; // Save logged in user data
 
   private userData$: BehaviorSubject<User | null> =
@@ -25,6 +26,11 @@ export class AuthService {
   public somthing: boolean = true;
 
   public somthing: boolean = false;
+=======
+  userData: any; // Save logged in user data
+  
+  public wow: boolean = false;
+>>>>>>> master
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
