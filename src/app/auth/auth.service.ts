@@ -21,6 +21,8 @@ export class AuthService {
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
+  
+  public somthing: boolean = true;
 
   public somthing: boolean = false;
 
