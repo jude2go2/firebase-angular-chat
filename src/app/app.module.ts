@@ -9,9 +9,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MaterialModule } from './material/material.module';
+import { FakeComponentComponent } from './components/fake-component/fake-component.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FakeComponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
