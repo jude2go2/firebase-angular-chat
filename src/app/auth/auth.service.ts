@@ -22,6 +22,8 @@ export class AuthService {
     false
   );
 
+  public somthing: boolean = false;
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
