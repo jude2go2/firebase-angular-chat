@@ -13,6 +13,8 @@ import { User } from '../models/user.interface';
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  
+  public wow: boolean = false;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
